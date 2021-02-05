@@ -1,7 +1,7 @@
 'use strict';
 
 const isNumber = (num) => {
-  return !isNaN(parseFloat(num)) && isFinite(num);
+    return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
 const randomInteger = (min, max) => {
@@ -13,11 +13,11 @@ const randomInteger = (min, max) => {
 const gameBot = () => {
 
     const maxCount = 10;
-    
+
     let number = randomInteger(1, 100),
         count = 0;
 
-    const isWin = (number) => {
+    const isWin = () => {
 
         let userNumber = prompt('Угадай число от 1 до 100');
 
@@ -25,7 +25,7 @@ const gameBot = () => {
             alert('Игра окончена');
         } else if (!isNumber(userNumber)) {
             alert('Введи число!');
-            isWin(number);
+            isWin();
         } else if (parseInt(userNumber) === number) {
             if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
                 gameBot();
@@ -34,11 +34,11 @@ const gameBot = () => {
             if (parseInt(userNumber) > number) {
                 count++;
                 alert('Загаданное число меньше, осталось попыток ' + (maxCount - count));
-                isWin(number);
+                isWin();
             } else {
                 count++;
                 alert('Загаданное число больше, осталось попыток ' + (maxCount - count));
-                isWin(number);
+                isWin();
             }
         } else {
             if (confirm('Попытки закончились, хотите сыграть еще?')) {
@@ -47,7 +47,7 @@ const gameBot = () => {
         }
     };
 
-    isWin(number);
+    isWin();
 };
 
 gameBot();
