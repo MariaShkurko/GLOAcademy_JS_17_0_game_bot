@@ -12,7 +12,10 @@ const randomInteger = (min, max) => {
 
 const gameBot = () => {
 
-    let number = randomInteger(1, 100);
+    const maxCount = 10;
+    
+    let number = randomInteger(1, 100),
+        count = 0;
 
     const isWin = (number) => {
 
@@ -24,13 +27,23 @@ const gameBot = () => {
             alert('Введи число!');
             isWin(number);
         } else if (parseInt(userNumber) === number) {
-            alert('Поздравляю, Вы угадали!!!');
-        } else if (parseInt(userNumber) > number) {
-            alert('Загаданное число меньше');
-            isWin(number);
+            if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
+                gameBot();
+            }
+        } else if (count < maxCount - 1) {
+            if (parseInt(userNumber) > number) {
+                count++;
+                alert('Загаданное число меньше, осталось попыток ' + (maxCount - count));
+                isWin(number);
+            } else {
+                count++;
+                alert('Загаданное число больше, осталось попыток ' + (maxCount - count));
+                isWin(number);
+            }
         } else {
-            alert('Загаданное число больше');
-            isWin(number);
+            if (confirm('Попытки закончились, хотите сыграть еще?')) {
+                gameBot();
+            }
         }
     };
 
